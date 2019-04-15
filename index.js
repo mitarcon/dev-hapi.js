@@ -3,8 +3,9 @@ const inert = require("inert");
 const path = require("path");
 
 //Require routes
-const indexRoute = require("./index.route");
-const staticRoute = require("./static.route");
+const indexRoute = require("./src/routes/index.route");
+const staticRoute = require("./src/routes/static.route");
+const homeRoute = require("./src/routes/home.route");
 
 const init = async ({ port }) => {
   const server = Hapi.server({
@@ -21,6 +22,7 @@ const init = async ({ port }) => {
 
   // add route to server
   server.route(indexRoute);
+  server.route(homeRoute);
   server.route(staticRoute);
 
   await server.start();
