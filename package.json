@@ -4,13 +4,15 @@
   "description": "Simple Node Sandbox",
   "main": "src/index.js",
   "scripts": {
-    "start": "nodemon index.js localhost 8080",
+    "start": "nodemon --ext js, hbs index.js localhost 8080",
     "init": "npm install && npm start"
   },
   "dependencies": {
+    "handlebars": "^4.1.2",
     "hapi": "18.1.0",
     "inert": "5.1.3",
-    "path": "0.12.7"
+    "path": "0.12.7",
+    "vision": "^5.4.4"
   },
   "devDependencies": {
     "nodemon": "1.18.4"

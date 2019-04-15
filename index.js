@@ -1,9 +1,10 @@
 const Hapi = require("hapi");
+const handlebars = require("handlebars");
 const inert = require("inert");
 const path = require("path");
+const vision = require("vision");
 
 //Require routes
-const indexRoute = require("./src/routes/index.route");
 const staticRoute = require("./src/routes/static.route");
 const homeRoute = require("./src/routes/home.route");
 
@@ -19,9 +20,20 @@ const init = async ({ port }) => {
 
   // register component
   await server.register(inert);
+  await server.register(vision);
+
+  // Configurar vision
+  server.views({
+    engines: {
+      hbs: handlebars
+    },
+    relativeTo: __dirname + "/src",
+    path: 'views',
+    layout: true,
+    layoutPath: 'views'
+  })
 
   // add route to server
-  server.route(indexRoute);
   server.route(homeRoute);
   server.route(staticRoute);
 

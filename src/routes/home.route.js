@@ -1,7 +1,9 @@
 module.exports = {
   method: "GET",
-  path: "/home",
+  path: "/",
   handler: (request, h) => {
-    return h.file('index.html');
+    return h.view('index', {
+      title: 'home'
+    })
   }
 };
