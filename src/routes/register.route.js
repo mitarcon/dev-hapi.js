@@ -2,6 +2,8 @@
 const UserController = require('../controllers/user.controller');
 const SiteController = require('../controllers/sites.controller');
 
+const UserSchema = require('./validate/user.schema');
+
 module.exports = [
   {
     method: "GET",
@@ -11,6 +13,11 @@ module.exports = [
   {
     method: "POST",
     path: "/register",
-    handler: UserController.create
+    handler: UserController.create,
+    options: {
+      validate: {
+        payload: UserSchema.createUser
+      }
+    }
   }
 ];
