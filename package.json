@@ -8,6 +8,7 @@
     "init": "npm install && npm start"
   },
   "dependencies": {
+    "dotenv": "^7.0.0",
     "handlebars": "^4.1.2",
     "hapi": "18.1.0",
     "inert": "5.1.3",

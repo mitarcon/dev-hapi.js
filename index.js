@@ -4,6 +4,8 @@ const inert = require("inert");
 const path = require("path");
 const vision = require("vision");
 
+const config = require("./config");
+
 //Require routes
 const Routes = require("./src/routes");
 
