@@ -12,9 +12,8 @@ module.exports = [
     method: "POST",
     path: "/register",
     handler: (request, h) => {
-      return h.view('index', {
-        title: 'home'
-      })
+      console.log(request.payload);
+      return 'Usuario creado'
     }
   }
 ];
