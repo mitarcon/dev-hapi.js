@@ -1,10 +1,12 @@
-module.exports = {
-  method: "GET",
-  path: "/{param*}",
-  handler: {
-    directory: {
-      path: ".",
-      index: ["index.html"]
+module.exports = [
+  {
+    method: "GET",
+    path: "/{param*}",
+    handler: {
+      directory: {
+        path: ".",
+        index: ["index.html"]
+      }
     }
   }
-};
+];
