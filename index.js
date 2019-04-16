@@ -7,6 +7,7 @@ const vision = require("vision");
 //Require routes
 const staticRoute = require("./src/routes/static.route");
 const homeRoute = require("./src/routes/home.route");
+const registerRoute = require("./src/routes/register.route");
 
 const init = async ({ port }) => {
   const server = Hapi.server({
@@ -21,6 +22,7 @@ const init = async ({ port }) => {
   // register component
   await server.register(inert);
   await server.register(vision);
+  await registerRoute(server);
 
   // Configurar vision
   server.views({
