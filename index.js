@@ -4,7 +4,8 @@ const inert = require('inert')
 const path = require('path')
 const vision = require('vision')
 
-// const config = require('./config')
+const bd = require('./src/models/index')
+console.log(db.User)
 
 // Require routes
 const Routes = require('./src/routes')
@@ -40,7 +41,7 @@ const init = async ({ port }) => {
   await server.start()
   console.log('Server running on %ss', server.info.uri)
 }
-
+/*
 init({
   port: 8080
-})
+})*/
