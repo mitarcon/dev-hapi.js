@@ -1,6 +1,6 @@
 
 function create (request, h) {
-  console.log(request.payload);
+  console.log(request.payload)
   return 'Usuario creado'
 }
 

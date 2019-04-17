@@ -1,5 +1,4 @@
 
-
 function register (request, h) {
   return h.view('register', {
     title: 'Registro'

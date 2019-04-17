@@ -1,8 +1,8 @@
-const register = require('./register.route');
-const home = require('./home.route');
-const static = require('./static.route');
+const register = require('./register.route')
+const home = require('./home.route')
+const staticFile = require('./static.route')
 module.exports = [].concat(
-  static,
+  staticFile,
   home,
   register
-);
+)

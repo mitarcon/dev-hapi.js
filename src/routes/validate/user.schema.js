@@ -1,8 +1,8 @@
-const Joi = require('joi');
+const Joi = require('joi')
 
 const createUser = {
   name: Joi.string().required().min(3),
-  email:  Joi.string().email({ minDomainAtoms: 2 }).required(),
+  email: Joi.string().email({ minDomainAtoms: 2 }).required(),
   password: Joi.string().required().min(6)
 }
 
