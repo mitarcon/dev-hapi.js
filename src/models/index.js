@@ -1,15 +1,12 @@
 const FirebaseAdmin = require('firebase-admin')
-const { firebase } = require('../../config')
+const { firebase: firebaseConfig } = require('../../config')
 
-// console.log('----> ', firebase.firebaseAdminConfig)
+FirebaseAdmin.initializeApp(firebaseConfig.firebaseAdminConfig(FirebaseAdmin))
 
-// FirebaseAdmin.initializeApp()
-const db = {
-  ref: () => { child: (obj) =>  console.log('es ', obj)}
-}
+const db = FirebaseAdmin.database()
 
 const User = require('./user.model')
 
 module.exports = {
-  User: new User(db)
+  UserModel: new User(db)
 }
