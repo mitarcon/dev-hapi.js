@@ -11,13 +11,12 @@ class UserModel {
   }
 
   async create (data) {
-    data.password = await bcryptUtils.encrypt({text:data.password})
+    data.password = await bcryptUtils.encrypt({ text: data.password })
     const newUser = this.collection.push()
     newUser.set(data)
 
     return newUser.key
   }
-
 }
 
 module.exports = UserModel

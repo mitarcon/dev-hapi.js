@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt')
 
-const {bcryptConfig} = require('../../config')
+const { bcryptConfig } = require('../../config')
 
 function encrypt ({ text, salt }) {
   return bcrypt.hash(text, salt || bcryptConfig.saltRounds)

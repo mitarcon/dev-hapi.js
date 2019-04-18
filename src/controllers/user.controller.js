@@ -2,8 +2,6 @@
 const { UserModel } = require('../models')
 
 async function create (request, h) {
-  console.log(request.payload)
-
   let result
   try {
     result = await UserModel.create(request.payload)
