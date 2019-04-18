@@ -1,4 +1,6 @@
 
+const bcryptUtils = require('../utils/bcrypt.utils')
+
 const refName = 'users'
 
 class UserModel {
@@ -8,20 +10,12 @@ class UserModel {
     this.collection = this.ref.child(refName)
   }
 
-  create (data) {
-    // data.password = await this.constructor.encrypt(data.password)
-    // data.password = data.password
+  async create (data) {
+    data.password = await bcryptUtils.encrypt({text:data.password})
     const newUser = this.collection.push()
     newUser.set(data)
 
     return newUser.key
-  }
-
-  static async encrypt (passwd) {
-    // const saltRounds = 10
-    // const hashedPassword = await bcrypt.hash(passwd, saltRounds)
-    const hashedPassword = passwd
-    return hashedPassword
   }
 
 }
