@@ -11,7 +11,7 @@ function decrypt ({ text }) {
 }
 
 function compare ({ textOne, textTwo, salt }) {
-
+  return bcrypt.compare(textOne, textTwo)
 }
 
 module.exports = {

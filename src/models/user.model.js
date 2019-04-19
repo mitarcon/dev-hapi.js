@@ -17,6 +17,28 @@ class UserModel {
 
     return newUser.key
   }
+
+  async login (data) {
+    const userQuery = await this.collection
+      .orderByChild('email')
+      .equalTo(data.email)
+      .once('value')
+    const userFound = userQuery.val()
+
+    if (userFound) {
+      const userId = Object.keys(userFound)[0]
+      const compare = {
+        textOne: data.password,
+        textTwo: userFound[userId].password
+      }
+      const passwRight = await bcryptUtils.compare(compare)
+      const result = (passwRight) ? userFound[userId] : false
+
+      return result
+    }
+
+    return false
+  }
 }
 
 module.exports = UserModel

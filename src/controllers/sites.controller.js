@@ -7,11 +7,18 @@ function register (request, h) {
 
 function home (request, h) {
   return h.view('index', {
-    title: 'home'
+    title: 'Home'
+  })
+}
+
+function login (request, h) {
+  return h.view('login', {
+    title: 'Login'
   })
 }
 
 module.exports = {
   home,
-  register
+  register,
+  login
 }

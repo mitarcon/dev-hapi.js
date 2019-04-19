@@ -6,6 +6,12 @@ const createUser = {
   password: Joi.string().required().min(6)
 }
 
+const loginUser = {
+  email: Joi.string().email({ minDomainAtoms: 2 }).required(),
+  password: Joi.string().required().min(6)
+}
+
 module.exports = {
-  createUser
+  createUser,
+  loginUser
 }
