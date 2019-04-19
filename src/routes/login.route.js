@@ -19,5 +19,10 @@ module.exports = [
         payload: UserSchema.loginUser
       }
     }
+  },
+  {
+    method: 'GET',
+    path: '/logout',
+    handler: SiteController.login
   }
 ]

@@ -1,19 +1,24 @@
 
+const { server: serverConfig } = require('./../../config')
+
 function register (request, h) {
   return h.view('register', {
-    title: 'Registro'
+    title: 'Registro',
+    user: request.state[serverConfig.userCookieName]
   })
 }
 
 function home (request, h) {
   return h.view('index', {
-    title: 'Home'
+    title: 'Home',
+    user: request.state[serverConfig.userCookieName]
   })
 }
 
 function login (request, h) {
   return h.view('login', {
-    title: 'Login'
+    title: 'Login',
+    user: request.state[serverConfig.userCookieName]
   })
 }
 

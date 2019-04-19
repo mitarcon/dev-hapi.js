@@ -4,7 +4,7 @@ const inert = require('inert')
 const path = require('path')
 const vision = require('vision')
 
-const { server: serverConfig } = require('./config')
+const { server: serverConfig, enviromentConfig } = require('./config')
 
 // Require routes
 const Routes = require('./src/routes')
@@ -22,6 +22,13 @@ const init = async ({ port }) => {
   // register component
   await server.register(inert)
   await server.register(vision)
+
+  // register state
+  server.state(serverConfig.userCookieName, {
+    ttl: 1000 * 60 * 60 * 24 * 7, // milisegundos * segundo * minutos * horas * dias
+    isSecure: enviromentConfig.isProd,
+    encoding: 'base64json'
+  })
 
   // Configurar vision
   server.views({
