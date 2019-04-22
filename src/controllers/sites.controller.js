@@ -26,9 +26,16 @@ function logout (req, h) {
   return h.redirect('/login').unstate(serverConfig.userCookieName)
 }
 
+function notFound (req, h) {
+  h.view('404', {}, {
+    layout: 'error-layout'
+  }).code(404)
+}
+
 module.exports = {
   home,
   register,
   login,
-  logout
+  logout,
+  notFound
 }
