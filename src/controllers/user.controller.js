@@ -1,7 +1,15 @@
 
+const Boom = require('boom')
+
 const { UserModel } = require('../models')
 
+const { server: serverConfig } = require('./../../config')
+
 async function create (request, h) {
+  if (request.state[serverConfig.userCookieName]) {
+    return h.redirect('/')
+  }
+
   let result
   try {
     result = await UserModel.create(request.payload)
@@ -13,6 +21,11 @@ async function create (request, h) {
   return h.response(`Usuario creado ID: ${result}`)
 }
 
+function failValidation (request, h, err) {
+  return Boom.badRequest('falló validación', request.payload)
+}
+
 module.exports = {
-  create
+  create,
+  failValidation
 }

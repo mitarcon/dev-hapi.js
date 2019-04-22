@@ -16,7 +16,8 @@ module.exports = [
     handler: UserController.create,
     options: {
       validate: {
-        payload: UserSchema.createUser
+        payload: UserSchema.createUser,
+        failAction: UserController.failValidation
       }
     }
   }

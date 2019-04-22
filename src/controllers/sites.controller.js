@@ -22,8 +22,13 @@ function login (request, h) {
   })
 }
 
+function logout (req, h) {
+  return h.redirect('/login').unstate(serverConfig.userCookieName)
+}
+
 module.exports = {
   home,
   register,
-  login
+  login,
+  logout
 }

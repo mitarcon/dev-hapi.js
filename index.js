@@ -48,6 +48,14 @@ const init = async ({ port }) => {
   console.log('Server running on %ss', server.info.uri)
 }
 
+process.on('unhandledRejection', error => {
+  console.error('UnhandledRejection', error.message, error)
+})
+
+process.on('unhandledException', error => {
+  console.error('unhandledException', error.message, error)
+})
+
 init({
   port: serverConfig.port
 })

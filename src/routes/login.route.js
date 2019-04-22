@@ -1,6 +1,7 @@
 
 const LoginController = require('../controllers/login.controller')
 const SiteController = require('../controllers/sites.controller')
+const UserController = require('../controllers/user.controller')
 
 const UserSchema = require('./validate/user.schema')
 
@@ -16,13 +17,14 @@ module.exports = [
     handler: LoginController.login,
     options: {
       validate: {
-        payload: UserSchema.loginUser
+        payload: UserSchema.loginUser,
+        failAction: UserController.failValidation
       }
     }
   },
   {
     method: 'GET',
     path: '/logout',
-    handler: SiteController.login
+    handler: SiteController.logout
   }
 ]
