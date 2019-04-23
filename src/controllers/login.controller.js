@@ -11,11 +11,16 @@ async function login (request, h) {
   try {
     result = await UserModel.login(request.payload)
     if (!result) {
-      return h.response('Email y/o constraseña incorrecta').code(401)
+      return h.view('login', {
+        title: 'Login',
+        error: 'Email y/o contraseña incorrecta'
+      })
     }
   } catch (error) {
-    console.error(error)
-    return h.response('Problemas validando el usuario').code(500)
+    return h.view('login', {
+      title: 'Login',
+      error: 'Problemas validando el usuario'
+    })
   }
 
   return h.redirect('/')

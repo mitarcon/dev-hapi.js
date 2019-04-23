@@ -10,15 +10,20 @@ async function create (request, h) {
     return h.redirect('/')
   }
 
-  let result
   try {
-    result = await UserModel.create(request.payload)
+    await UserModel.create(request.payload)
   } catch (error) {
     console.error(error)
-    return h.response('Problemas creando el usuario').code(500)
+    return h.view('Register', {
+      title: 'Registro',
+      error: 'Error creando el usuario'
+    })
   }
 
-  return h.response(`Usuario creado ID: ${result}`)
+  return h.view('register', {
+    title: 'Registro',
+    success: 'Usuario creado exitosamente'
+  })
 }
 
 function failValidation (request, h, err) {
