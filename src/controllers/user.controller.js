@@ -1,6 +1,4 @@
 
-const Boom = require('boom')
-
 const { UserModel } = require('../models')
 
 const { server: serverConfig } = require('./../../config')
@@ -27,7 +25,15 @@ async function create (request, h) {
 }
 
 function failValidation (request, h, err) {
-  return Boom.badRequest('falló validación', request.payload)
+  const templates = {
+    '/register': 'register',
+    '/login': 'login'
+  }
+
+  return h.view(templates[request.path], {
+    title: 'Error de validación',
+    error: 'Por favor complete los campos requeridos'
+  }).code(400).takeover()
 }
 
 module.exports = {
