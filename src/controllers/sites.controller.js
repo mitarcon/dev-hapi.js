@@ -27,7 +27,7 @@ function logout (req, h) {
 }
 
 function notFound (req, h) {
-  h.view('404', {}, {
+  return h.view('404', {}, {
     layout: 'error-layout'
   }).code(404)
 }
