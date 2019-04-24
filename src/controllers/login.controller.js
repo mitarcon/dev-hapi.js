@@ -3,10 +3,6 @@ const { UserModel } = require('../models')
 const { server: serverConfig } = require('./../../config')
 
 async function login (request, h) {
-  if (request.state[serverConfig.userCookieName]) {
-    return h.redirect('/')
-  }
-
   let result
   try {
     result = await UserModel.login(request.payload)

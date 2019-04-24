@@ -1,4 +1,6 @@
 
+const { QuestionModel } = require('../models')
+
 const { server: serverConfig } = require('./../../config')
 
 function register (request, h) {
@@ -8,10 +10,18 @@ function register (request, h) {
   })
 }
 
-function home (request, h) {
+async function home (request, h) {
+  let data
+  try {
+    data = await QuestionModel.getLast({ amount: 10 })
+  } catch (err) {
+    console.log(err)
+  }
+
   return h.view('index', {
     title: 'Home',
-    user: request.state[serverConfig.userCookieName]
+    user: request.state[serverConfig.userCookieName],
+    questions: data
   })
 }
 
