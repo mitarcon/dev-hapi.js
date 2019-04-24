@@ -29,7 +29,7 @@ function logout (req, h) {
 function notFound (req, h) {
   const response = req.response
 
-  if (response.isBoom && response.output.statusCode === 404) {
+  if (response && response.isBoom && response.output.statusCode === 404) {
     return h.view('404', {}, {
       layout: 'error-layout'
     }).code(404)
@@ -38,10 +38,22 @@ function notFound (req, h) {
   return h.continue
 }
 
+function question (req, h) {
+  if (!req.state.user) {
+    return h.redirect('/login')
+  }
+
+  return h.view('question', {
+    title: 'Pregunta',
+    user: req.state[serverConfig.userCookieName]
+  })
+}
+
 module.exports = {
   home,
   register,
   login,
   logout,
-  notFound
+  notFound,
+  question
 }

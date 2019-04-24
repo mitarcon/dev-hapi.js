@@ -27,7 +27,8 @@ async function create (request, h) {
 function failValidation (request, h, err) {
   const templates = {
     '/register': 'register',
-    '/login': 'login'
+    '/login': 'login',
+    '/question': 'question'
   }
 
   return h.view(templates[request.path], {
