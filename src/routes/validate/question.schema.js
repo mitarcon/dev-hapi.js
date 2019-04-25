@@ -6,6 +6,12 @@ const create = {
   description: Joi.string().required()
 }
 
+const addAnswer = {
+  answer: Joi.string().required(),
+  id: Joi.string()
+}
+
 module.exports = {
-  create
+  create,
+  addAnswer
 }

@@ -25,10 +25,13 @@ async function create (request, h) {
 }
 
 function failValidation (request, h, err) {
+  console.log('request.payload:', request.payload)
+  console.log(`request.path: ${request.path}`)
   const templates = {
     '/register': 'register',
     '/login': 'login',
-    '/question': 'question'
+    '/ask': 'ask',
+    '/question/{id}/add-answer': 'question'
   }
 
   return h.view(templates[request.path], {

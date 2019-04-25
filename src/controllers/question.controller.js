@@ -22,6 +22,25 @@ function create (req, h) {
   })
 }
 
+async function addAnswer (req, h) {
+  if (!req.state.user) {
+    return h.redirect('/login')
+  }
+  const user = req.state.user
+  const questionId = req.params.id
+  const answer = req.payload.answer
+  const question = { id: questionId }
+
+  try {
+    await QuestionModel.addAnswer({ question, user, answer })
+  } catch (err) {
+    console.log(err)
+  }
+
+  return h.redirect(`/question/${questionId}`)
+}
+
 module.exports = {
-  create
+  create,
+  addAnswer
 }

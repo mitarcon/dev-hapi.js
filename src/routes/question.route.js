@@ -21,5 +21,16 @@ module.exports = [
         failAction: UserController.failValidation
       }
     }
+  },
+  {
+    method: 'POST',
+    path: '/question/{id}/add-answer',
+    handler: QuestionController.addAnswer,
+    options: {
+      validate: {
+        payload: QuestionSchema.addAnswer,
+        failAction: UserController.failValidation
+      }
+    }
   }
 ]
