@@ -48,16 +48,25 @@ function notFound (req, h) {
   return h.continue
 }
 
-function question (req, h) {
-  /*   if (!req.state.user) {
-      return h.redirect('/login')
-    }
+async function getQuestion (req, h) {
+  if (!req.state.user) {
+    return h.redirect('/login')
+  }
+  const questionId = req.params.id
+  let question
+  try {
+    question = await QuestionModel.getOne({ id: questionId })
+  } catch (err) {
+    console.log(err)
+    return notFound(req, h)
+  }
 
-    return h.view('question', {
-      title: 'Pregunta',
-      user: req.state[serverConfig.userCookieName]
-    }) */
-  return h.redirect('/login')
+  return h.view('question', {
+    title: 'Detalle de la pregunta',
+    user: req.state[serverConfig.userCookieName],
+    key: questionId,
+    question
+  })
 }
 
 function ask (req, h) {
@@ -77,6 +86,6 @@ module.exports = {
   login,
   logout,
   notFound,
-  question,
+  getQuestion,
   ask
 }

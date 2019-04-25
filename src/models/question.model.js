@@ -17,9 +17,15 @@ class Question {
   }
 
   async getLast ({ amount }) {
+    // TODO: Aplicar logica para poder ordenar por fecha de publicacion
     const query = await this.collection.limitToLast(amount).once('value')
     const data = query.val()
     return data
+  }
+
+  async getOne ({ id }) {
+    const query = await this.collection.child(id).once('value')
+    return query.val()
   }
 }
 

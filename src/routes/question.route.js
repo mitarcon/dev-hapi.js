@@ -8,8 +8,8 @@ const QuestionSchema = require('./validate/question.schema')
 module.exports = [
   {
     method: 'GET',
-    path: '/question',
-    handler: SiteController.question
+    path: '/question/{id}',
+    handler: SiteController.getQuestion
   },
   {
     method: 'POST',
