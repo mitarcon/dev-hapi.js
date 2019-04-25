@@ -1,5 +1,5 @@
 const Hapi = require('hapi')
-const handlebars = require('handlebars')
+const handlebars = require('./lib/handlebards')
 const inert = require('inert')
 const path = require('path')
 const vision = require('vision')
