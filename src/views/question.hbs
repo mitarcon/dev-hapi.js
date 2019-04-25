@@ -15,7 +15,12 @@
             Creada por <strong>{{answer.user.name}}</strong>
           </div>
           <div class="col-sm text-right">
-
+            {{#with user}}
+              {{!-- Se suben dos niveles porque #ifEquals es un nivel, #with user es otro nivel -> ../../question --}}
+              {{#ifEquals ../../question.owner.email ../../user.email}}
+                <a href="" class="btn btn-primary" role="button">Elegir respuesta correcta</a>
+              {{/ifEquals}}
+            {{/with}}
           </div>
         </div>
       </div>
