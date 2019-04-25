@@ -9,14 +9,16 @@ function create (req, h) {
     QuestionModel.create({ data: question, user })
   } catch (err) {
     console.log(err)
-    h.view('question', {
+    h.view('ask', {
       title: 'Preguntar',
-      error: 'Error creando la pregunta'
+      error: 'Error creando la pregunta',
+      user: user
     })
   }
-  return h.view('question', {
+  return h.view('ask', {
     title: 'Preguntar',
-    success: 'Pregunta creado exitosamente'
+    success: 'Pregunta creado exitosamente',
+    user: user
   })
 }
 

@@ -49,12 +49,24 @@ function notFound (req, h) {
 }
 
 function question (req, h) {
+  /*   if (!req.state.user) {
+      return h.redirect('/login')
+    }
+
+    return h.view('question', {
+      title: 'Pregunta',
+      user: req.state[serverConfig.userCookieName]
+    }) */
+  return h.redirect('/login')
+}
+
+function ask (req, h) {
   if (!req.state.user) {
     return h.redirect('/login')
   }
 
-  return h.view('question', {
-    title: 'Pregunta',
+  return h.view('ask', {
+    title: 'Preguntar',
     user: req.state[serverConfig.userCookieName]
   })
 }
@@ -65,5 +77,6 @@ module.exports = {
   login,
   logout,
   notFound,
-  question
+  question,
+  ask
 }
