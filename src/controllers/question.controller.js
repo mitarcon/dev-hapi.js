@@ -40,7 +40,29 @@ async function addAnswer (req, h) {
   return h.redirect(`/question/${questionId}`)
 }
 
+async function setCorrectAnswer (req, h) {
+  console.log('entro aqui ')
+  if (!req.state.user) {
+    return h.redirect('/login')
+  }
+
+  const user = req.state.user
+  const { questionId, answerId } = req.params
+  let status
+
+  console.log(`questionId: ${questionId} - answerId: ${answerId}`)
+  try {
+    status = await req.server.methods.setAnswerRight({ questionId, answerId, user })
+    console.log(`status ${status}`)
+  } catch (err) {
+    console.log(err)
+  }
+
+  return h.redirect(`/question/${req.params.questionId}`)
+}
+
 module.exports = {
   create,
-  addAnswer
+  addAnswer,
+  setCorrectAnswer
 }

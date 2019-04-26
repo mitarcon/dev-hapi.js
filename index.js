@@ -4,6 +4,8 @@ const inert = require('inert')
 const path = require('path')
 const vision = require('vision')
 
+const Server = require('./lib/server')
+
 const { server: serverConfig, enviromentConfig } = require('./config')
 
 // Require routes
@@ -43,6 +45,9 @@ const init = async ({ port }) => {
 
   // add route to server
   server.route(Routes)
+
+  // Agregar metodos al servidor
+  Server(server)
 
   await server.start()
   console.log('Server running on %ss', server.info.uri)

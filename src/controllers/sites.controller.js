@@ -49,9 +49,6 @@ function notFound (req, h) {
 }
 
 async function getQuestion (req, h) {
-  if (!req.state.user) {
-    return h.redirect('/login')
-  }
   const questionId = req.params.id
   let question
   try {

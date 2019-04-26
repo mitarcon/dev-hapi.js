@@ -32,5 +32,10 @@ module.exports = [
         failAction: UserController.failValidation
       }
     }
+  },
+  {
+    method: 'GET',
+    path: '/question/{questionId}/correct-answer/{answerId}',
+    handler: QuestionController.setCorrectAnswer
   }
 ]
