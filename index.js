@@ -47,7 +47,7 @@ const init = async ({ port }) => {
   server.route(Routes)
 
   // Agregar metodos al servidor
-  Server(server)
+  await Server(server)
 
   await server.start()
   console.log('Server running on %ss', server.info.uri)
