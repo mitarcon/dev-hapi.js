@@ -11,7 +11,7 @@ async function create (request, h) {
   try {
     await UserModel.create(request.payload)
   } catch (error) {
-    console.error(error)
+    request.log('error', error)
     return h.view('Register', {
       title: 'Registro',
       error: 'Error creando el usuario'
@@ -25,8 +25,6 @@ async function create (request, h) {
 }
 
 function failValidation (request, h, err) {
-  console.log('request.payload:', request.payload)
-  console.log(`request.path: ${request.path}`)
   const templates = {
     '/register': 'register',
     '/login': 'login',

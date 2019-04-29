@@ -11,8 +11,10 @@ const { server: serverConfig, enviromentConfig } = require('./config')
 // Require routes
 const Routes = require('./src/routes')
 
+let server
+
 const init = async ({ port }) => {
-  const server = Hapi.server({
+  server = Hapi.server({
     port,
     routes: {
       files: {
@@ -50,15 +52,15 @@ const init = async ({ port }) => {
   await Server(server)
 
   await server.start()
-  console.log('Server running on %ss', server.info.uri)
+  server.log('info', `Server running on ${server.info.uri}`)
 }
 
 process.on('unhandledRejection', error => {
-  console.error('UnhandledRejection', error.message, error)
+  server.log('UnhandledRejection', error)
 })
 
 process.on('unhandledException', error => {
-  console.error('unhandledException', error.message, error)
+  server.log('unhandledException', error)
 })
 
 init({

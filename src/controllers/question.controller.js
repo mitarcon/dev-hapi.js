@@ -28,7 +28,7 @@ async function create (req, h) {
   try {
     result = QuestionModel.create({ data: question, user })
   } catch (err) {
-    console.log(err)
+    req.log('error', err)
     h.view('ask', {
       title: 'Preguntar',
       error: 'Error creando la pregunta',
@@ -51,28 +51,24 @@ async function addAnswer (req, h) {
   try {
     await QuestionModel.addAnswer({ question, user, answer })
   } catch (err) {
-    console.log(err)
+    req.log('error', err)
   }
 
   return h.redirect(`/question/${questionId}`)
 }
 
 async function setCorrectAnswer (req, h) {
-  console.log('entro aqui ')
   if (!req.state.user) {
     return h.redirect('/login')
   }
 
   const user = req.state.user
   const { questionId, answerId } = req.params
-  let status
 
-  console.log(`questionId: ${questionId} - answerId: ${answerId}`)
   try {
-    status = await req.server.methods.setAnswerRight({ questionId, answerId, user })
-    console.log(`status ${status}`)
+    await req.server.methods.setAnswerRight({ questionId, answerId, user })
   } catch (err) {
-    console.log(err)
+    req.log('error', err)
   }
 
   return h.redirect(`/question/${req.params.questionId}`)

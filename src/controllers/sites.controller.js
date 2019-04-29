@@ -49,7 +49,7 @@ async function getQuestion (req, h) {
   try {
     question = await QuestionModel.getOne({ id: questionId })
   } catch (err) {
-    console.log(err)
+    req.log('error', err)
     return notFound(req, h)
   }
 
