@@ -10,17 +10,12 @@ function register (request, h) {
   })
 }
 
-async function home (request, h) {
-  let data
-  try {
-    data = await QuestionModel.getLast({ amount: 10 })
-  } catch (err) {
-    console.log(err)
-  }
+async function home (req, h) {
+  let data = await req.server.methods.getLastQuestions({ amount: 10 })
 
   return h.view('index', {
     title: 'Home',
-    user: request.state[serverConfig.userCookieName],
+    user: req.state[serverConfig.userCookieName],
     questions: data
   })
 }
