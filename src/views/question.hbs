@@ -8,7 +8,7 @@
       </p>
       <hr>
     {{/with}}
-    <p class="mb-0">Creada por <strong>{{user.name}}</strong></p>
+    <p class="mb-0">Creada por <strong>{{question.owner.name}}</strong></p>
   </div>
 
    {{#each question.answers as |answer key|}}
