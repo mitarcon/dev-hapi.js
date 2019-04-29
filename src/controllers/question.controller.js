@@ -1,12 +1,32 @@
 
+const uuid = require('uuid/v1')
+
 const { QuestionModel } = require('./../models')
 const { server: serverConfig } = require('./../../config')
+const { uploadFile } = require('../../lib/files')
 
-function create (req, h) {
-  const question = req.payload
+async function create (req, h) {
+  if (!req.state.user) {
+    return h.redirect('/login')
+  }
+
+  let result, question
+  question = req.payload
+
+  // Validar archivo
+  if (Buffer.isBuffer(question.image)) {
+    const filename = `${uuid()}.png`
+
+    if (uploadFile({ buffer: question.image, name: filename })) {
+      question.filename = filename
+    }
+
+    delete question.image
+  }
+
   const user = req.state[serverConfig.userCookieName]
   try {
-    QuestionModel.create({ data: question, user })
+    result = QuestionModel.create({ data: question, user })
   } catch (err) {
     console.log(err)
     h.view('ask', {
@@ -15,11 +35,8 @@ function create (req, h) {
       user: user
     })
   }
-  return h.view('ask', {
-    title: 'Preguntar',
-    success: 'Pregunta creado exitosamente',
-    user: user
-  })
+
+  return h.redirect(`/question/${result}`)
 }
 
 async function addAnswer (req, h) {
